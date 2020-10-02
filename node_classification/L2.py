@@ -52,9 +52,10 @@ def learn_A2 (A):
     I = torch.eye(A.shape[0]).cuda()
     A2 = A + A.t() +I             
                                    
-    rowsum = torch.sum(A2,dim=1)**(-1)
+    rowsum = torch.sum(A2,dim=1)**(-0.5)
     D2 = torch.diag(rowsum)
     A2 = torch.mm(D2,A2)
+    A2 = torch.mm(A2,D2)
     return A2        
     
 
